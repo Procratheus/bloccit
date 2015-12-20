@@ -1,5 +1,5 @@
 <h1> <%= @post.title %> </h1>
-
+<%= link_to "Edit", edit_post_path(@post.id), class: "btn btn-warning" %>
 <p>
   <%= @post.body %>
 </p>

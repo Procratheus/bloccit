@@ -1,0 +1,15 @@
+<h1> <%= @question.title %> </h1>
+<%= link_to "Edit", edit_question_path(@question.id), class: "btn btn-warning" %>
+<p>
+  <%= @question.body %>
+</p>
+<p>
+  Status
+</p>
+<p>
+  <% if @question.resolved? %>
+    <%= @question.resolved %>
+  <% else %>
+    <%= @question.resolved %>
+  <% end %>
+</p>

@@ -11,13 +11,12 @@
   <div class="container">
     <ul class="nav nav-pills">
       <li> <%= link_to "Home", root_path %> </li>
-      <li> <%= link_to "About", welcome_about_path %> </li>
-      <li> <%= link_to "Contact", welcome_contact_path %> </li>
+      <li> <%= link_to "About", about_path %> </li>
+      <li> <%= link_to "Contact", contact_path %> </li>
     </ul>
+
+    <%= yield %>
   </div>
-
-
-  <%= yield %>
 
 </body>
 </html>

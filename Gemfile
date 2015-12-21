@@ -55,3 +55,4 @@ end
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'pry-rails', '~> 0.3.4'
 gem 'faker', '~> 1.6', '>= 1.6.1'
+gem 'devise', '~> 3.5', '>= 3.5.3'

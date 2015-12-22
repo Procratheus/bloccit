@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  before_action :flash_attack
 
   def index
     @posts = Post.all
@@ -14,7 +13,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.new(post_params)
     if @post.save
       flash[:notice] = "Your new post was succesfully created"
       redirect_to @post
@@ -56,10 +55,6 @@ class PostsController < ApplicationController
 
     def post_params
       params.require(:post).permit(:title, :body)
-    end
-
-    def flash_attack
-      flash[:notice] = "This is a flash attack"
     end
 
 end

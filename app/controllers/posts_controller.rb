@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :flash_attack
 
   def index
     @posts = Post.all
@@ -55,6 +56,10 @@ class PostsController < ApplicationController
 
     def post_params
       params.require(:post).permit(:title, :body)
+    end
+
+    def flash_attack
+      flash[:notice] = "This is a flash attack"
     end
 
 end

@@ -2,18 +2,22 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    authorize @posts
   end
 
   def show
     @post = Post.find(params[:id])
+    authorize @post
   end
 
   def new
     @post = Post.new
+    authorize @post
   end
 
   def create
     @post = current_user.posts.new(post_params)
+    authorize @post
     if @post.save
       flash[:notice] = "Your new post was succesfully created"
       redirect_to @post
@@ -25,10 +29,12 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    authorize @post
   end
 
   def update
     @post = Post.find(params[:id])
+    authorize @post
 
     if @post.update(post_params)
       flash[:notice] = "Your post was succesfully updated!"
@@ -41,6 +47,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
+    authorize @post
 
     if @post.destroy
       flash[:notice] = "Your post was succesfully deleted!"

@@ -6,8 +6,27 @@ Comment.destroy_all
 Question.destroy_all
 Answer.destroy_all
 
-10.times do
+admin = User.new(
+  role: 'admin',
+  name: Faker::Name.name,
+  email: 'admin@example.com',
+  password: 'admin'
+)
+admin.skip_confirmation!
+admin.save
+
+moderator = User.new(
+  role: 'moderator',
+  name: Faker::Name.name,
+  email: 'moderator@example.com',
+  password: 'moderator'
+)
+moderator.skip_confirmation!
+moderator.save
+
+8.times do
   user = User.new(
+    role: 'member',
     name: Faker::Name.name,
     email: Faker::Internet.email,
     password: Faker::Lorem.characters(10)

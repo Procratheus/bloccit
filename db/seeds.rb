@@ -13,7 +13,7 @@ admin = User.new(
   password: 'admin'
 )
 admin.skip_confirmation!
-admin.save
+admin.save!
 
 moderator = User.new(
   role: 'moderator',
@@ -22,7 +22,7 @@ moderator = User.new(
   password: 'moderator'
 )
 moderator.skip_confirmation!
-moderator.save
+moderator.save!
 
 8.times do
   user = User.new(
@@ -43,7 +43,7 @@ users = User.all
     title: Faker::Lorem.sentence,
     body: Faker::Lorem.paragraph
   )
-  post.save
+  post.save!
 end
 
 posts = Post.all
@@ -53,7 +53,7 @@ posts = Post.all
     post: posts.sample,
     body: Faker::Lorem.paragraph
   )
-  comment.save
+  comment.save!
 end
 
 comments = Comment.all
@@ -63,7 +63,7 @@ comments = Comment.all
     title: Faker::Lorem.sentence,
     body: Faker::Lorem.paragraph
   )
-  question.save
+  question.save!
 end
 
 questions = Question.all
@@ -73,7 +73,7 @@ questions = Question.all
     question: questions.sample,
     body: Faker::Lorem.paragraph
   )
-  answer.save
+  answer.save!
 end
 
 answers = Answer.all

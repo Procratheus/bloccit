@@ -1,6 +1,7 @@
 require 'faker'
 
 User.destroy_all
+Topic.destroy_all
 Post.destroy_all
 Comment.destroy_all
 Question.destroy_all
@@ -10,7 +11,7 @@ admin = User.new(
   role: 'admin',
   name: Faker::Name.name,
   email: 'admin@example.com',
-  password: 'admin'
+  password: 'administrator'
 )
 admin.skip_confirmation!
 admin.save!
@@ -37,9 +38,20 @@ end
 
 users = User.all
 
+10.times do
+  topic = Topic.new(
+    name: Faker::Lorem.sentence,
+    description: Faker::Lorem.paragraph
+  )
+  topic.save!
+end
+
+topics = Topic.all
+
 50.times do
   post = Post.new(
     user: users.sample,
+    topic: topics.sample,
     title: Faker::Lorem.sentence,
     body: Faker::Lorem.paragraph
   )
@@ -80,6 +92,7 @@ answers = Answer.all
 
 puts "Seeds finished"
 puts "#{users.count} users created"
+puts "#{topics.count} topics created"
 puts "#{posts.count} posts created."
 puts "#{comments.count} comments created."
 puts "#{questions.count} questions created."

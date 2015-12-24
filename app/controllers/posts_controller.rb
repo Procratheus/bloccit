@@ -22,7 +22,7 @@ class PostsController < ApplicationController
       flash[:notice] = "Your new post was succesfully created"
       redirect_to [@topic, @post]
     else
-      flash[:error] = "There was a problem saving your post. Please try again!"
+      flash[:danger] = "There was a problem saving your post. Please try again!"
       render :new
     end
   end
@@ -42,7 +42,7 @@ class PostsController < ApplicationController
       flash[:notice] = "Your post was succesfully updated!"
       redirect_to [@topic, @post]
     else
-      flash[:error] = "There was an error updating your post. Please try again!"
+      flash[:danger] = "There was an error updating your post. Please try again!"
       render :edit
     end
   end
@@ -56,7 +56,7 @@ class PostsController < ApplicationController
       flash[:notice] = "Your post was succesfully deleted!"
       redirect_to @topic
     else
-      flash[:error] = "There was an error deleting your post. Please try again!"
+      flash[:danger] = "There was an error deleting your post. Please try again!"
       redirect_to @post
     end
   end

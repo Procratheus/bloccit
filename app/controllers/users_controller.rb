@@ -5,7 +5,7 @@ class UsersController < ApplicationController
       flash[:notice] = "User updated"
       redirect_to edit_user_registration_path
     else
-      flash[:error] = "There was a problem updating your details. Please try again!"
+      flash[:danger] = "There was a problem updating your details. Please try again!"
       redirect_to edit_user_registration_path
     end
   end

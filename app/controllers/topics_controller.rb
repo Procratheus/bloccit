@@ -24,7 +24,7 @@ class TopicsController < ApplicationController
       flash[:notice] = "Topic saved."
       redirect_to @topic
     else
-      flash[:error] = "There was a problem saving your topic. Please try again."
+      flash[:danger] = "There was a problem saving your topic. Please try again."
       render :new
     end
   end
@@ -42,7 +42,7 @@ class TopicsController < ApplicationController
       flash[:notice] = "Topic updated."
       redirect_to @topic
     else
-      flash[:error] = "There was a problem saving your topic. Please try again."
+      flash[:danger] = "There was a problem saving your topic. Please try again."
       render :edit
     end
   end
@@ -55,7 +55,7 @@ class TopicsController < ApplicationController
       flash[:notice] = "Topic deleted"
       redirect_to @topics
     else
-      flash[:error] = "There was a problem deleting your topic. Please try again."
+      flash[:danger] = "There was a problem deleting your topic. Please try again."
       redirect_to @topic
     end
   end

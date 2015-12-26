@@ -14,6 +14,9 @@ class Post < ActiveRecord::Base
   validates :title, length: { minimum: 5 }, presence: true
   validates :body, length: { minimum: 20 }, presence: true
 
+  ## Image uploading and processing
+  mount_uploader :image, ImageUploader
+
   ## Markdown
   def markdown_title
     render_as_markdown(self.title)

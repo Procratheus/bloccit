@@ -38,7 +38,7 @@ end
 
 users = User.all
 
-10.times do
+200.times do
   topic = Topic.new(
     name: Faker::Lorem.sentence,
     description: Faker::Lorem.paragraph
@@ -48,7 +48,7 @@ end
 
 topics = Topic.all
 
-50.times do
+5000.times do
   post = Post.new(
     user: users.sample,
     topic: topics.sample,
@@ -60,10 +60,11 @@ end
 
 posts = Post.all
 
-100.times do
+25000.times do
   comment = Comment.new(
     post: posts.sample,
     body: Faker::Lorem.paragraph
+    user: users.sample
   )
   comment.save!
 end

@@ -26,6 +26,7 @@ gem 'redcarpet', '~> 3.3', '>= 3.3.3'
 gem 'mini_magick'
 gem 'carrierwave'
 gem 'fog'
+gem 'will_paginate', '~> 3.0', '>= 3.0.7'
 
 group :development, :test do
   gem 'byebug'
@@ -35,6 +36,8 @@ end
 
 group :development do
   gem 'sqlite3'
+  gem 'better_errors', '~> 2.1', '>= 2.1.1'
+  gem 'binding_of_caller', '~> 0.7.2'
 end
 
 group :production do

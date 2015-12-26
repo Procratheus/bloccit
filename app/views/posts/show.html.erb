@@ -1,4 +1,4 @@
-<h1> <%= @post.markdown_title %> <%= image_tag(@post.image.thumb.url) %></h1>      
+<h1> <%= @post.markdown_title %> <%= image_tag(@post.image.thumb.url) %></h1>
 
 <div class="row">
   <div class="col-md-8">
@@ -10,6 +10,10 @@
     <p>
       <%= @post.markdown_body %>
     </p>
+    <%= render @comments %>
+    <div>
+      <%= render partial: "comments/form", locals: {topic: @topic, post: @post, comment: Comment.new} %>
+    </div>
   </div>
   <div class="col-md-4">
     <% if policy(@post).edit? %>

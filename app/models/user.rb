@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   ## Relationships
   has_many :posts
+  has_many :comments
 
   ## Image uploading and processing
   mount_uploader :avatar, AvatarUploader

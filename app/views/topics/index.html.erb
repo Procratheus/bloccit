@@ -10,10 +10,13 @@
           </h4>
           <small>
             <%= topic.description %>
+            <br>
+            <%= pluralize(topic.posts.count, "post") %>
           </small>
         </div>
       </div>
     <% end %>
+    <%= will_paginate @topics %>
   </div>
 
   <div class="col-md-4">

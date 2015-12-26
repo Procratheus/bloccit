@@ -4,8 +4,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
+  ## Relationships
   has_many :posts
 
+  ## Image uploading and processing
+  mount_uploader :avatar, AvatarUploader
+
+  ## Roles
   def admin?
     role == 'admin'
   end

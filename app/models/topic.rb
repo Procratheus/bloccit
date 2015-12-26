@@ -1,5 +1,5 @@
 class Topic < ActiveRecord::Base
-  has_many :posts
+  has_many :posts, dependent: :destroy
 
   ## Will paginate customization
   self.per_page = 20

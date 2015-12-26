@@ -13,13 +13,16 @@
     <%= render @comments %>
     <% if policy(Comment.new).create? %>
       <div>
-        <%= render partial: "comments/form", locals: {topic: @topic, post: @post, comment: Comment.new} %>
+        <%= render partial: "comments/form", locals: {post: @post, comment: Comment.new} %>
       </div>
     <% end %>
   </div>
   <div class="col-md-4">
     <% if policy(@post).edit? %>
       <%= link_to "Edit", edit_topic_post_path(@topic, @post), class: "btn btn-warning" %>
+    <% end %>
+    <% if policy(@post).destroy? %>
+      <%= link_to "Delete Post", [@topic, @post], class: "btn btn-danger", method: :delete %>
     <% end %>
   </div>
 </div>

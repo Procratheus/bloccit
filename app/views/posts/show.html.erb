@@ -11,9 +11,11 @@
       <%= @post.markdown_body %>
     </p>
     <%= render @comments %>
-    <div>
-      <%= render partial: "comments/form", locals: {topic: @topic, post: @post, comment: Comment.new} %>
-    </div>
+    <% if policy(Comment.new).create? %>
+      <div>
+        <%= render partial: "comments/form", locals: {topic: @topic, post: @post, comment: Comment.new} %>
+      </div>
+    <% end %>
   </div>
   <div class="col-md-4">
     <% if policy(@post).edit? %>

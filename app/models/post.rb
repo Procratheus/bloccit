@@ -1,7 +1,8 @@
 class Post < ActiveRecord::Base
-  has_many :comments, dependent: :destroy
   belongs_to :user
   belongs_to :topic
+  has_many :comments, dependent: :destroy
+  has_many :votes, dependent: :destroy
 
   ## Scopes
   default_scope { order("created_at DESC")}
@@ -9,8 +10,8 @@ class Post < ActiveRecord::Base
   scope :ordered_by_reversed_created_at, -> { order("created_at ASC")}
 
   ## Validations
-  validates :user, presence: true
-  validates :topic, presence: true
+  #validates :user, presence: true
+  #validates :topic, presence: true
   validates :title, length: { minimum: 5 }, presence: true
   validates :body, length: { minimum: 20 }, presence: true
 
@@ -24,6 +25,20 @@ class Post < ActiveRecord::Base
 
   def markdown_body
     render_as_markdown(self.body)
+  end
+
+  ## Votes counters for posts
+
+  def up_votes
+    votes.where(value: 1).count
+  end
+
+  def down_votes
+    votes.where(value: -1).count
+  end
+
+  def points
+    up_votes - down_votes
   end
 
   private

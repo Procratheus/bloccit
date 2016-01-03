@@ -1,24 +1,22 @@
-require "rails_helper"
+require 'rails_helper'
 
-describe Vote do
-
-  before do
-    @vote = Vote.create!(value: 1)
-  end
+RSpec.describe Vote, type: :model do
 
   describe "Validations" do
-    describe "value validations" do
-      it "should allow votes to be saved with a value of 1" do
-        expect( @vote.value ).to eq(1)
+    describe "value validation" do
+      before do
+        vote1 = Vote.new(value: 1)
+        vote2 = Vote.new(value: -1)
+        vote3 = Vote.new(value: 2)
       end
 
-      it "should allow vates to be saved with a value of -1" do
-        @vote.update(value: -1)
-
-        expect( @vote.value ).to eq(-1)
+      it "should not allow a vote to be saved if it does not equal 1 || -1" do
+        expect( vote1.valid? ).to eq(true)
+        expect( vote2.valid? ).to eq(true)
+        expect( vote3.valid? ).to eq(false)
       end
     end
-
   end
+
 
 end

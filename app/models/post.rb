@@ -49,8 +49,11 @@ class Post < ActiveRecord::Base
   end
 
   ## Create a vote each time a new post is created
-  def create_vote
-    user.votes.create(value: 1, post_id: self.id)
+  def save_with_initial_vote
+    self.transaction do
+      self.save
+      user.votes.create(value: 1, post_id: self.id)
+    end
   end
 
   private

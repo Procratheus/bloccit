@@ -53,14 +53,16 @@ topics = Topic.all
     user: users.sample,
     topic: topics.sample,
     title: Faker::Lorem.sentence,
-    body: Faker::Lorem.paragraph
+    body: Faker::Lorem.paragraph,
   )
   post.save!
+  post.update!(created_at: rand(10.mins .. 1.year).ago)
+  post.update_rank
 end
 
 posts = Post.all
 
-25000.times do
+20000.times do
   comment = Comment.new(
     post: posts.sample,
     body: Faker::Lorem.paragraph

@@ -4,8 +4,11 @@ class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
 
+  ## Callbacks
+  after_create :create_vote
+
   ## Scopes
-  default_scope { order("created_at DESC")}
+  default_scope { order("rank DESC")}
   scope :ordered_by_title, -> { order("title DESC")}
   scope :ordered_by_reversed_created_at, -> { order("created_at ASC")}
 
@@ -38,7 +41,14 @@ class Post < ActiveRecord::Base
   end
 
   def points
-    up_votes - down_votes
+    votes.sum(:value)
+  end
+
+  ## Ranking Algorithym
+  def update_rank
+    age_in_days = (created_at - Time.new(1970,1,1))/(60*60*24)
+    new_rank = age_in_days + points
+    update(:rank, new_rank)
   end
 
   private
@@ -48,5 +58,9 @@ class Post < ActiveRecord::Base
       extensions = {fenced_code_blocks: true}
       redcarpet = Redcarpet::Markdown.new(renderer, extensions={})
       (redcarpet.render text).html_safe
+    end
+
+    def create_vote
+      user.votes.create(value: 1, post_id: self)
     end
 end

@@ -48,6 +48,11 @@ class Post < ActiveRecord::Base
     update_attribute(:rank, new_rank)
   end
 
+  ## Create a vote each time a new post is created
+  def create_vote
+    user.votes.create(value: 1, post_id: self.id)
+  end
+
   private
 
     def render_as_markdown(text)
@@ -57,7 +62,4 @@ class Post < ActiveRecord::Base
       (redcarpet.render text).html_safe
     end
 
-    def create_vote
-      user.votes.create(value: 1, post_id: self.id)
-    end
 end

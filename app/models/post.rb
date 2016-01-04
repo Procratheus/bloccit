@@ -4,17 +4,14 @@ class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
 
-  ## Callbacks
-  after_create :create_vote
-
   ## Scopes
   default_scope { order("rank DESC")}
   scope :ordered_by_title, -> { order("title DESC")}
   scope :ordered_by_reversed_created_at, -> { order("created_at ASC")}
 
   ## Validations
-  #validates :user, presence: true
-  #validates :topic, presence: true
+  validates :user, presence: true
+  validates :topic, presence: true
   validates :title, length: { minimum: 5 }, presence: true
   validates :body, length: { minimum: 20 }, presence: true
 

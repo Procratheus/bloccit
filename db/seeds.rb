@@ -57,6 +57,7 @@ topics = Topic.all
   )
   post.save!
   post.update!(created_at: rand(10.mins .. 1.year).ago)
+  post.create_vote
   post.update_rank
 end
 

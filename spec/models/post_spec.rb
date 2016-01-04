@@ -5,7 +5,7 @@ describe Post do
   describe "vote_methods" do
 
     before do
-      @post = Post.create!(title: 'post title', body: 'post body should be at least 20 characters')
+      @post = associated_post
       3.times { @post.votes.create(value: 1) }
       2.times { @post.votes.create(value: -1) }
     end
@@ -28,6 +28,36 @@ describe Post do
       end
     end
 
+    describe "#create_vote" do
+      it "should create and up vote when a vote is saved" do
+        post = associated_post
+        expect( post.up_votes ).to eq(0)
+        post.create_vote
+        expect( post.up_votes ).to eq(1)
+      end
+    end
+
   end
 
+end
+
+def associated_post(options={})
+  post_options = {
+    user: authenticated_user,
+    topic: Topic.create(name: 'Topic Name'),
+    title: 'Post title',
+    body: 'Post title must be very long'
+  }.merge(options)
+  Post.create(post_options)
+end
+
+def authenticated_user(options={})
+  user_options = {
+    email: "email#{rand}@test.com",
+    password: 'password'
+  }.merge(options)
+  user = User.new(user_options)
+  user.skip_confirmation!
+  user.save
+  user
 end

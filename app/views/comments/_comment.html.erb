@@ -1,4 +1,4 @@
-<div class="media">
+<%= content_tag :div, class: 'media', id: 'comment-#{comment.id}' do %>
   <div class="media-body">
     <p class="media-heading">
       <%= comment.body %>
@@ -13,5 +13,5 @@
     </small>
 
   </div>
-</div>
+<% end %>
 <%= will_paginate @comments %>

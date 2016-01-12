@@ -8,13 +8,13 @@ describe Comment do
 
     before do
       @post = associated_post
-      @favourited_user = authenticated_user(favourited: true)
+      @favorited_user = authenticated_user(email_favorites: true)
       @commenting_user = authenticated_user
       @comment = Comment.new(body: "My new comment", post: @post, user: @commenting_user)
     end
 
     it "sends an e-mail to users who have favourited the post" do
-      favorite = @favourited_user.favorites.create(post: @post) 
+      favorite = @favorited_user.favorites.create(post: @post)
 
       allow( FavoriteMailer ).to receive(:new_comment).with(@user, @post, @comment).and_return( double(deliver_now: true) )
 

@@ -1,9 +1,9 @@
 require "rails_helper"
 
-describe FavouritesController do
+describe FavoritesController do
 
   include TestFactories
-  include Devise:TestHelpers
+  include Devise::TestHelpers
 
   before do
     @post = associated_post

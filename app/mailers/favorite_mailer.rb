@@ -1,5 +1,5 @@
 class FavoriteMailer < ApplicationMailer
-
+  
   def new_comment(user, post, comment)
 
     ## New headers

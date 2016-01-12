@@ -4,7 +4,7 @@ class Topic < ActiveRecord::Base
   # Scopes for public and private topics
   scope :visible_to, -> (user) { user ? privately_viewable : publicly_viewable }
   scope :publicly_viewable, -> { where(public:true) }
-  scope :privately_viewable, -> { where(public: true) && where(public: false) }
+  scope :privately_viewable, -> { where("public = ? OR public = ?", true, false) }
 
   ## Will paginate customization
   self.per_page = 20

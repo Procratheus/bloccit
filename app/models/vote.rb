@@ -8,6 +8,14 @@ class Vote < ActiveRecord::Base
   ## Callbacks
   after_save :update_post
 
+  def upvote?
+    value == 1
+  end
+
+  def downvote?
+    value == -1
+  end
+
   private
 
     def update_post

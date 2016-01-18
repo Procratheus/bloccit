@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.paginate(page: params[:page])
+    @posts = @user.posts.visible_to(current_user).paginate(page: params[:page])
     @comments = @user.comments.paginate(page: params[:page])
   end
 

@@ -8,10 +8,9 @@
       submitted <%= time_ago_in_words(comment.created_at) %> ago by <%= comment.user.name %>
       <br>
       <% if policy(comment).destroy? %>
-        <%= link_to "Delete comment", [@post, comment], class: "btn btn-xs btn-danger", method: :delete %>
+        <%= link_to "Delete comment", [comment.post, comment], class: "btn btn-xs btn-danger", method: :delete %>
       <% end %>
     </small>
 
   </div>
 <% end %>
-<%= will_paginate @comments %>

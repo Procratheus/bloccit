@@ -66,7 +66,7 @@ posts = Post.all
 20000.times do
   comment = Comment.new(
     post: posts.sample,
-    body: Faker::Lorem.paragraph
+    body: Faker::Lorem.paragraph,
     user: users.sample
   )
   comment.save!

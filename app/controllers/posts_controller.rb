@@ -1,71 +1,7 @@
 class PostsController < ApplicationController
 
-  def show
-    @topic = Topic.find(params[:topic_id])
-    @post = @topic.posts.find(params[:id])
-    @comments = @post.comments.paginate(page: params[:page])
-    authorize @post
+  def index
+    @posts = Post.visible_to(current_user).where('posts.created_at < ?', 7.days.ago).paginate(page: params[:page])
   end
-
-  def new
-    @topic = Topic.find(params[:topic_id])
-    @post = Post.new
-    authorize @post
-  end
-
-  def create
-    @topic = Topic.find(params[:topic_id])
-    @post = Post.new(post_params)
-    @post.topic = @topic
-    @post.user = current_user
-    authorize @post
-    if @post.save_with_initial_vote
-      flash[:notice] = "Your new post was succesfully created"
-      redirect_to [@topic, @post]
-    else
-      flash[:danger] = "There was a problem saving your post. Please try again!"
-      render :new
-    end
-  end
-
-  def edit
-    @topic = Topic.find(params[:topic_id])
-    @post = Post.find(params[:id])
-    authorize @post
-  end
-
-  def update
-    @topic = Topic.find(params[:topic_id])
-    @post = Post.find(params[:id])
-    authorize @post
-
-    if @post.update(post_params)
-      flash[:notice] = "Your post was succesfully updated!"
-      redirect_to [@topic, @post]
-    else
-      flash[:danger] = "There was an error updating your post. Please try again!"
-      render :edit
-    end
-  end
-
-  def destroy
-    @topic = Topic.find(params[:topic_id])
-    @post = Post.find(params[:id])
-    authorize @post
-
-    if @post.destroy
-      flash[:notice] = "#{@post.title} was succesfully deleted!"
-      redirect_to @topic
-    else
-      flash[:danger] = "There was an error deleting your post. Please try again!"
-      redirect_to @post
-    end
-  end
-
-  private
-
-    def post_params
-      params.require(:post).permit(:title, :body, :image)
-    end
 
 end

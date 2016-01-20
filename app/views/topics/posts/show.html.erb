@@ -10,7 +10,7 @@
     <p>
       <%= @post.markdown_body %>
     </p>
-    <%= render @comments %>
+    <%= render partial: 'comments/comment' collection: @comments %>
     <% if policy(Comment.new).create? %>
       <div>
         <%= render partial: "comments/form", locals: {post: @post, comment: Comment.new} %>
